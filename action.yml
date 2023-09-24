@@ -38,6 +38,16 @@ runs:
         shell: bash
         run: npm run dist --if-present
 
+      - name: Create blog post metadata
+        shell: bash
+        run: npm run posts
+
+      - name: Create RSS feed
+        shell: bash
+        run: npm run rss
+        env:
+          SITE_URL: ${{ secrets.SITE_URL }}
+          
       - name: Staging Deploy
         if: github.ref == 'refs/heads/main'
         shell: bash
